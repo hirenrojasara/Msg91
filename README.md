@@ -4,7 +4,7 @@ Msg91 API for node.js
 How to integrate:
 
 ```sh
-var msg91 = require("./app")("API_KEY", "SENDER_ID", "ROUTE_NO" );
+var msg91 = require("msg91")("API_KEY", "SENDER_ID", "ROUTE_NO" );
 
 msg91.send("MOBILE_NO", "MESSAGE", function(err, response){
     console.log(err);
