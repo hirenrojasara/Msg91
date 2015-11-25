@@ -12,6 +12,8 @@ msg91.send("MOBILE_NO", "MESSAGE", function(err, response){
 })
 ```
 
+# Msg91 Installation
+> npm install msg91 --save
 
 ROUTE_NO
 
