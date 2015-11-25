@@ -6,7 +6,7 @@ How to integrate:
 ```sh
 var msg91 = require("./app")("API_KEY", "SENDER_ID", "ROUTE_NO" );
 
-msg91.send("MOBILE_NO, "MESSAGE", function(err, response){
+msg91.send("MOBILE_NO", "MESSAGE", function(err, response){
     console.log(err);
     console.log(response);
 })
