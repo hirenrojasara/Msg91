@@ -2,17 +2,17 @@
 Msg91 API for node.js
 
 # Msg91 Installation
-```sh 
+
+```javascript 
 npm install msg91 --save
 ```
 
+# Msg91 Integration
 
-How to integrate:
 
-```sh
+### Send SMS
 
-> Send SMS
-
+```javascript
 var msg91 = require("msg91")("API_KEY", "SENDER_ID", "ROUTE_NO" );
 
 
@@ -24,18 +24,18 @@ var mobileNo = [ "XXXXXXXXXX", "XXXXXXXXXX", "XXXXXXXXXX" ];
 
 var mobileNo =  "XXXXXXXXXX,XXXXXXXXXX,XXXXXXXXXX";
 
-
 msg91.send(mobileNo, "MESSAGE", function(err, response){
     console.log(err);
     console.log(response);
 });
+```
 
 
 
 
+### Get Balance
 
-> Get Balance
-
+```javascript
 msg91.getBalance(function(err, msgCount){
     console.log(err);
     console.log(msgCount);
@@ -46,14 +46,16 @@ msg91.getBalance("ROUTE_NO", function(err, msgCount){
     console.log(err);
     console.log(msgCount);
 });
-
 ```
 
 
-ROUTE_NO
 
+# Msg91 Constants
+
+
+### ROUTE_NO
+```javascript
 1 - Promotional Route
-
 4 - Transactional Route
-
+```
 
