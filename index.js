@@ -20,19 +20,11 @@ module.exports = function (authKey, senderId, route) {
 
     this.send = function (mobileNos, message, callback) {
 
-        callback = callback || function(){};
+        callback = modifyCallbackIfNull(callback);
 
-        if (mobileNos == null || mobileNos == "") {
-            throw new Error("MSG91 : Mobile No is not provided.");
-        }
+        mobileNos = validateMobileNos(mobileNos);
 
-        if(mobileNos instanceof Array){
-            mobileNos = mobileNos.join(",");
-        }
-
-        if (message == null || message == "") {
-            throw new Error("MSG91 : message is not provided.");
-        }
+        message = validateMessage(validateMessage);
 
         var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route;
 
@@ -49,13 +41,65 @@ module.exports = function (authKey, senderId, route) {
 
         makeHttpRequest(options, postData, function(err, data){
             callback(err, data);
-        })
+        });
+
+
 
     };
+
+    this.getBalance = function(customRoute, callback) {
+
+        if(arguments.length == 1) {
+            callback = customRoute;
+            customRoute = null;
+        }
+
+        callback = modifyCallbackIfNull(callback);
+
+        var currentRoute = customRoute || route;
+
+        var options = {
+            hostname: 'control.msg91.com',
+            port: 80,
+            path: '/api/balance.php?authkey=' + authKey + '&type=' + currentRoute,
+            method: 'GET'
+        };
+
+        makeHttpRequest(options, null, function(err, data){
+            callback(err, data);
+        });
+
+    }
 
     return this;
 
 };
+
+function validateMobileNos(mobileNos){
+
+    if (mobileNos == null || mobileNos == "") {
+        throw new Error("MSG91 : Mobile No is not provided.");
+    }
+
+    if(mobileNos instanceof Array){
+        mobileNos = mobileNos.join(",");
+    }
+
+    return mobileNos
+}
+
+function validateMessage(message){
+
+    if (message == null || message == "") {
+        throw new Error("MSG91 : message is not provided.");
+    }
+
+    return message;
+}
+
+function modifyCallbackIfNull(callback){
+    return callback || function(){};
+}
 
 function makeHttpRequest(options, postData, callback) {
 
@@ -75,7 +119,10 @@ function makeHttpRequest(options, postData, callback) {
         callback(e);
     });
 
-    req.write(postData);
+    if(postData!=null){
+        req.write(postData);
+    }
+
     req.end();
 
 }

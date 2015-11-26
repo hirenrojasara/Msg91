@@ -2,3 +2,5 @@ Version         Changes
 ==============================================================
 0.0.3           Support for Simple Message Send API
 0.0.4           Support for Single No, Array List, CSV
+
+0.0.5-Dev       Get Balance / Get Balance by Route

@@ -11,6 +11,8 @@ How to integrate:
 
 ```sh
 
+> Send SMS
+
 var msg91 = require("msg91")("API_KEY", "SENDER_ID", "ROUTE_NO" );
 
 
@@ -26,6 +28,23 @@ var mobileNo =  "XXXXXXXXXX,XXXXXXXXXX,XXXXXXXXXX";
 msg91.send(mobileNo, "MESSAGE", function(err, response){
     console.log(err);
     console.log(response);
+});
+
+
+
+
+
+> Get Balance
+
+msg91.getBalance(function(err, msgCount){
+    console.log(err);
+    console.log(msgCount);
+});
+
+// Get Balance for given Route.
+msg91.getBalance("ROUTE_NO", function(err, msgCount){
+    console.log(err);
+    console.log(msgCount);
 });
 
 ```
