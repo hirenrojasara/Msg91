@@ -20,8 +20,14 @@ module.exports = function (authKey, senderId, route) {
 
     this.send = function (mobileNos, message, callback) {
 
+        callback = callback || function(){};
+
         if (mobileNos == null || mobileNos == "") {
             throw new Error("MSG91 : Mobile No is not provided.");
+        }
+
+        if(mobileNos instanceof Array){
+            mobileNos = mobileNos.join(",");
         }
 
         if (message == null || message == "") {
@@ -41,27 +47,35 @@ module.exports = function (authKey, senderId, route) {
             }
         };
 
-        var http = require("http");
-        var data = "";
-        var req = http.request(options, function (res) {
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-                data += chunk;
-            });
-            res.on('end', function () {
-                callback(null, data);
-            })
-        });
-
-        req.on('error', function (e) {
-            callback(e);
-        });
-
-        req.write(postData);
-        req.end();
+        makeHttpRequest(options, postData, function(err, data){
+            callback(err, data);
+        })
 
     };
 
     return this;
 
 };
+
+function makeHttpRequest(options, postData, callback) {
+
+    var http = require("http");
+    var data = "";
+    var req = http.request(options, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            data += chunk;
+        });
+        res.on('end', function () {
+            callback(null, data);
+        })
+    });
+
+    req.on('error', function (e) {
+        callback(e);
+    });
+
+    req.write(postData);
+    req.end();
+
+}
