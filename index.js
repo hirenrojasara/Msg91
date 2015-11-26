@@ -26,7 +26,13 @@ module.exports = function (authKey, senderId, route) {
 
         message = validateMessage(validateMessage);
 
+        var isUnicode = isUnicodeString(message);
+
         var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route;
+
+        if(isUnicode){
+            postData = "&unicode=1";
+        }
 
         var options = {
             hostname: 'control.msg91.com',
@@ -99,6 +105,13 @@ function validateMessage(message){
 
 function modifyCallbackIfNull(callback){
     return callback || function(){};
+}
+
+function isUnicodeString(str) {
+    for (var i = 0, n = str.length; i < n; i++) {
+        if (str.charCodeAt( i ) > 255) { return true; }
+    }
+    return false;
 }
 
 function makeHttpRequest(options, postData, callback) {

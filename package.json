@@ -1,6 +1,6 @@
 {
   "name": "msg91",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "description": "API For MSG91 SMS Gateway. - It is not an official version of MSG91",
   "main": "app.js",
