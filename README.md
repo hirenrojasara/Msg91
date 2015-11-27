@@ -1,6 +1,10 @@
 # Msg91
 Msg91 API for node.js
 
+
+[![NPM](https://nodei.co/npm/msg91.png?downloads=true)](https://npmjs.org/package/msg91)
+
+
 # Msg91 Installation
 
 ```javascript 
