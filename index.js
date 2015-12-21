@@ -24,7 +24,7 @@ module.exports = function (authKey, senderId, route) {
 
         mobileNos = validateMobileNos(mobileNos);
 
-        message = validateMessage(validateMessage);
+        message = validateMessage(message);
 
         var isUnicode = isUnicodeString(message);
 
