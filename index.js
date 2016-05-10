@@ -31,7 +31,7 @@ module.exports = function (authKey, senderId, route) {
         var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route;
 
         if(isUnicode){
-            postData = "&unicode=1";
+            postData += "&unicode=1";
         }
 
         var options = {
