@@ -17,6 +17,38 @@ module.exports = function (authKey, senderId, route) {
     if (route == null || route == "") {
         throw new Error("MSG91 router Id is not provided.");
     }
+    
+    this.sendInternational = function (mobileNos, message, callback) {
+
+        callback = modifyCallbackIfNull(callback);
+
+        mobileNos = validateMobileNos(mobileNos);
+
+        message = validateMessage(message);
+
+        var isUnicode = isUnicodeString(message);
+
+        var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route + '&country=0';
+
+        if (isUnicode) {
+            postData = "&unicode=1";
+        }
+
+        var options = {
+            hostname: 'control.msg91.com',
+            port: 80,
+            path: '/api/sendhttp.php',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': postData.length
+            }
+        };
+
+        makeHttpRequest(options, postData, function (err, data) {
+            callback(err, data);
+        });
+    };
 
     this.send = function (mobileNos, message, callback) {
 
