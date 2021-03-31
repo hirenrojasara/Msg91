@@ -18,7 +18,7 @@ module.exports = function (authKey, senderId, route) {
         throw new Error("MSG91 router Id is not provided.");
     }
 
-    this.send = function (mobileNos, message, callback) {
+    this.send = function (mobileNos, message, DLT_TE_ID, callback) {
 
         callback = modifyCallbackIfNull(callback);
 
@@ -27,8 +27,8 @@ module.exports = function (authKey, senderId, route) {
         message = validateMessage(message);
 
         var isUnicode = isUnicodeString(message);
-
-        var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route;
+        // Adding support for DLT template to accommodate changes by TRAI
+        var postData = "authkey=" + authKey + "&sender=" + senderId + "&mobiles=" + mobileNos + "&message=" + message + "&route=" + route + "&DLT_TE_ID=" + DLT_TE_ID;
 
         if(isUnicode){
             postData += "&unicode=1";
