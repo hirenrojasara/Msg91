@@ -6,7 +6,7 @@
 
  var mobileNo = "XXXXXXXXXX";
  
- msg91.send("mobileNo", "MESSAGE","DLT_TE_ID", function (err, response) {
+ msg91.send(mobileNo, "MESSAGE","DLT_TE_ID", function (err, response) {
      console.log(err);
      console.log(response);
  });
