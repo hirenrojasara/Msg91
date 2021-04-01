@@ -1,15 +1,10 @@
 # Msg91
+
+
 Msg91 API for node.js
 
+Last Updated : 01/04/2021
 
-[![NPM](https://nodei.co/npm/msg91.png?downloads=true)](https://npmjs.org/package/msg91)
-
-
-# Msg91 Installation
-
-```javascript 
-npm install msg91 --save
-```
 
 # Msg91 Integration
 
@@ -17,7 +12,7 @@ npm install msg91 --save
 ### Send SMS
 
 ```javascript
-var msg91 = require("msg91")("API_KEY", "SENDER_ID", "ROUTE_NO" );
+var msg91 = require("./index.js")("API_KEY", "SENDER_ID", "ROUTE_NO" );
 
 
 // Mobile No can be a single number, list or csv string
@@ -28,7 +23,7 @@ var mobileNo = [ "XXXXXXXXXX", "XXXXXXXXXX", "XXXXXXXXXX" ];
 
 var mobileNo =  "XXXXXXXXXX,XXXXXXXXXX,XXXXXXXXXX";
 
-msg91.send(mobileNo, "MESSAGE", function(err, response){
+msg91.send(mobileNo, "MESSAGE", "DLT_TE_ID", function(err, response){
     console.log(err);
     console.log(response);
 });
@@ -63,3 +58,7 @@ msg91.getBalance("ROUTE_NO", function(err, msgCount){
 4 - Transactional Route
 ```
 
+### DLT_TE_ID
+```
+TRAI assigns a template ID to all whitelisted templates. This should be passed as a string param
+```
