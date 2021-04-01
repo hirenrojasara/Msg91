@@ -3,6 +3,7 @@
  * @param authKey
  * @param senderId
  * @param route : Value can be 1 for Promotional Router or 4 for Transactional Route
+ * @param DLT_TE_ID : Issues DLT Template ID from TRAI
  */
 module.exports = function (authKey, senderId, route) {
 
